@@ -27,6 +27,7 @@ input:focus { outline: 3px solid #d9d0ee; border-color: #655486; }
 .ticket-option input { width: 18px; height: 18px; flex-shrink: 0; margin: 0; accent-color: #443762; }
 .ticket-option strong { display: block; font-size: 14px; }
 .ticket-option small { display: block; margin-top: 6px; font-size: 12px; line-height: 1.4; font-weight: 400; color: #74717d; }
+.ticket-option .weekend-warning { color: #946019; font-weight: 700; }
 .preview { container-type: inline-size; }
 .demo-banner { background: #fff0ba; color: #5a410b; text-align: center; padding: 10px 5px; font-size: 13px; font-weight: 900; letter-spacing: 1px; }
 .animated-purple { background: #30294e; position: relative; isolation: isolate; overflow: hidden; animation: purple-glow 1.8s ease-in-out infinite; }

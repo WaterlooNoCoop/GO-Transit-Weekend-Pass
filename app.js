@@ -1,4 +1,4 @@
-import { duration, torontoTime, PREVIEW_DURATION, mondayCutoff } from './time.js';
+import { duration, torontoTime, PREVIEW_DURATION, mondayCutoff, isWeekend } from './time.js';
 
 const byId = id => document.getElementById(id);
 const form = byId('route-form');
@@ -8,6 +8,7 @@ let startedAt = null;
 let expiresAt = null;
 
 function updateClocks() {
+  byId('weekend-warning').hidden = isWeekend(new Date());
   if (startedAt === null) return;
   const now = new Date();
   const elapsed = now.getTime() - startedAt;
@@ -54,5 +55,6 @@ form.addEventListener('submit', event => {
 });
 
 // Tick every second so the clocks advance in real time.
+updateClocks();
 setInterval(updateClocks, 1000);
 document.addEventListener('visibilitychange', updateClocks);

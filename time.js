@@ -26,6 +26,13 @@ export function mondayCutoff(now) {
   return cutoff > now.getTime() ? cutoff : torontoInstant(monday + 7 * 24 * 60 * 60 * 1000);
 }
 
+export function isWeekend(now) {
+  const local = new Date(localTimestamp(now));
+  const day = local.getUTCDay();
+  const hour = local.getUTCHours();
+  return (day === 6 && hour >= 4) || day === 0 || (day === 1 && hour < 4);
+}
+
 export function duration(milliseconds) {
   const seconds = Math.floor(Math.max(0, milliseconds) / 1000);
   return [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60]

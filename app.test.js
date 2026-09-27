@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
-import { duration, torontoTime, PREVIEW_DURATION, mondayCutoff } from './time.js';
+import { duration, torontoTime, PREVIEW_DURATION, mondayCutoff, isWeekend } from './time.js';
 
 async function setup() {
   const elements = new Map();
@@ -18,7 +18,7 @@ async function setup() {
   let tick;
   const source = await readFile(new URL('./app.js', import.meta.url), 'utf8');
   runInNewContext(source.replace(/^import[^\n]+\n/, ''), {
-    duration, torontoTime, PREVIEW_DURATION, mondayCutoff, Date: class extends Date { constructor(...args) { super(...(args.length ? args : ['2026-08-29T12:00:00Z'])); } }, Math: { random: () => 0.25, floor: Math.floor, min: Math.min },
+    duration, torontoTime, PREVIEW_DURATION, mondayCutoff, isWeekend, Date: class extends Date { constructor(...args) { super(...(args.length ? args : ['2026-08-29T12:00:00Z'])); } }, Math: { random: () => 0.25, floor: Math.floor, min: Math.min },
     document: { getElementById: getElement, addEventListener() {} },
     window: { scrollTo() {} },
     setInterval(handler) { tick = handler; }

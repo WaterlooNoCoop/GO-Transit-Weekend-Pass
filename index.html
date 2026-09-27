@@ -20,7 +20,7 @@
         <fieldset class="ticket-options">
           <legend>Ticket type</legend>
           <label class="ticket-option"><input id="one-way-option" type="radio" name="ticket-type" value="one-way" checked><span><strong>One way ticket</strong><small>One trip for one adult</small></span></label>
-          <label class="ticket-option"><input id="weekend-option" type="radio" name="ticket-type" value="weekend"><span><strong>Weekend pass</strong><small>Multiple trips with one pass</small></span></label>
+          <label class="ticket-option"><input id="weekend-option" type="radio" name="ticket-type" value="weekend"><span><strong>Weekend pass</strong><small>Multiple trips with one pass</small><small id="weekend-warning" class="weekend-warning" role="status" hidden>It's not weekend yet</small></span></label>
         </fieldset>
         <label for="origin">Starting station</label>
         <input id="origin" name="origin" list="stations" value="Wilfrid Laurier University" placeholder="Enter starting station" maxlength="80" required autocomplete="off">
