@@ -66,6 +66,6 @@ test('one way selection renders the adult ticket and four hour countdown', async
   assert.equal(get('preview').className, 'preview');
   assert.equal(get('fare-label').textContent, '1x Weekend Pass');
   assert.equal(get('ticket-status').textContent, 'ACTIVE');
-  assert.equal(get('one-way-brand').hidden, true);
+  assert.equal(get('one-way-brand').hidden, false);
   assert.match(get('remaining').textContent, /^(18:00:00|17:59:59)$/);
 });

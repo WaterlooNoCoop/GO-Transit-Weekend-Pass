@@ -34,7 +34,7 @@ form.addEventListener('submit', event => {
   byId('preview').className = oneWay ? 'preview one-way' : 'preview';
   byId('preview').setAttribute('aria-label', oneWay ? 'One way ticket demo' : 'Weekend pass demo');
   byId('route-title').textContent = oneWay ? `${from} to ${to}` : `${from} to ${to} · Weekend Pass`;
-  byId('one-way-brand').hidden = !oneWay;
+  byId('one-way-brand').hidden = false;
   byId('one-way-arrow').hidden = !oneWay;
   byId('fare-label').textContent = oneWay ? '1x Adult' : '1x Weekend Pass';
   byId('usage-label').textContent = oneWay ? 'One-Way' : 'Multi Use Pass';
