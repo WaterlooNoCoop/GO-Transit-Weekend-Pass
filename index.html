@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#30294e">
+  <meta name="author" content="Waterloo No Coop">
+  <title>Weekend Pass · Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="app">
+    <section id="setup" class="setup" aria-labelledby="setup-title">
+      <div class="eyebrow">WEEKEND PASS / INTERFACE DEMO</div>
+      <div class="intro-icon" aria-hidden="true">↗</div>
+      <h1 id="setup-title">Where are you headed?</h1>
+      <p class="intro">Choose your stations to preview a weekend pass.</p>
+      <form id="route-form">
+        <label for="origin">Starting station</label>
+        <input id="origin" name="origin" list="stations" value="Wilfrid Laurier University" placeholder="Enter starting station" maxlength="80" required autocomplete="off">
+        <button type="button" id="swap" class="swap" aria-label="Swap starting station and destination">⇅</button>
+        <label for="destination">Destination</label>
+        <input id="destination" name="destination" list="stations" value="Bramalea GO" placeholder="Enter destination" maxlength="80" required autocomplete="off">
+        <datalist id="stations">
+          <option value="Wilfrid Laurier University"></option>
+          <option value="Bramalea GO"></option>
+          <option value="Union Station"></option>
+          <option value="Kitchener GO"></option>
+          <option value="Waterloo"></option>
+          <option value="Brampton GO"></option>
+          <option value="Oakville GO"></option>
+          <option value="Guildwood GO"></option>
+          <option value="Oshawa GO"></option>
+          <option value="Niagara Falls GO"></option>
+        </datalist>
+        <p id="form-error" class="form-error" role="alert"></p>
+        <button class="primary" type="submit">Preview pass <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="disclaimer">A visual demo only. This does not purchase a ticket and is not valid for travel.</p>
+    </section>
+
+    <section id="preview" class="preview" aria-label="Weekend pass demo" hidden>
+      <header class="route-header animated-purple">
+        <h1 id="route-title"></h1>
+      </header>
+      <div class="pass-body">
+        <div class="summary">
+          <div class="passenger">
+            <div class="quantity">x1</div>
+            <h2>Passenger(s)</h2>
+            <p>1x Weekend Pass</p>
+          </div>
+          <div class="train-divider" aria-hidden="true">
+            <svg viewBox="0 0 32 44"><rect x="3" y="3" width="26" height="30" rx="7" fill="currentColor"/><path d="M6 8h8v9H6zm12 0h8v9h-8" fill="white"/><circle cx="10" cy="26" r="2.6" fill="white"/><circle cx="22" cy="26" r="2.6" fill="white"/><path d="m11 33-5 7h20l-5-7" fill="currentColor"/></svg>
+          </div>
+          <div class="multi-use">
+            <svg class="ticket-icon" viewBox="0 0 64 56" aria-hidden="true"><g transform="rotate(-22 32 28)" fill="none" stroke="currentColor" stroke-width="5"><rect x="9" y="12" width="46" height="32" rx="3"/><path d="M40 13v30"/></g></svg>
+            <h2>Multi Use Pass</h2>
+          </div>
+        </div>
+        <div class="sample-details">
+          <p class="reference">Ticket Number: <strong>MZ67806986</strong></p>
+          <div class="sample-panel" aria-label="Decorative stripe pattern labelled demo, not a ticket"><span>ACTIVE</span></div>
+          <div class="clocks">
+            <div><h3>CURRENT DATE &amp; TIME:</h3><time id="current-time"></time></div>
+            <div><h3>TIME SINCE ACTIVATION:</h3><span id="elapsed">00:00:00</span></div>
+          </div>
+        </div>
+      </div>
+      <footer class="pass-footer animated-purple">
+        <p>Please show proof of your ticket to the<br>Customer Protective Officers when<br>asked</p>
+        <div id="remaining" class="remaining" aria-label="Preview countdown">18:00:00</div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
