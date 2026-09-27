@@ -80,6 +80,7 @@ button:focus-visible { outline: 3px solid #a992d3; outline-offset: 3px; }
 .one-way .ticket-icon { display: none; }
 .one-way .multi-use { display: flex; flex-direction: column; align-items: center; }
 .one-way-arrow { display: block; flex-shrink: 0; width: 10cqw; height: 9cqw; margin: 0 auto 2.4cqw; color: #374146; }
+.one-way-arrow svg { display: block; width: 100%; height: 100%; }
 .one-way .sample-panel { color: #b8d4ae; }
 .one-way .sample-panel span { width: 62cqw; white-space: nowrap; animation-name: one-way-fade; }
 @keyframes one-way-fade { 0%, 100% { color: rgb(184 212 174 / 1); } 50% { color: rgb(184 212 174 / 0); } }
