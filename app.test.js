@@ -60,7 +60,6 @@ test('one way selection renders the adult ticket and four hour countdown', async
   assert.equal(get('ticket-status').textContent, 'VALID FOR TRAVEL');
   assert.equal(get('one-way-brand').hidden, false);
   assert.equal(get('one-way-arrow').hidden, false);
-  assert.equal(get('one-way-disclaimer').hidden, false);
   assert.match(get('remaining').textContent, /^(04:00:00|03:59:59)$/);
   get('one-way-option').checked = false;
   submit();

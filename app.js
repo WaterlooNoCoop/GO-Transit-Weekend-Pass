@@ -36,7 +36,6 @@ form.addEventListener('submit', event => {
   byId('route-title').textContent = oneWay ? `${from} to ${to}` : `${from} to ${to} · Weekend Pass`;
   byId('one-way-brand').hidden = !oneWay;
   byId('one-way-arrow').hidden = !oneWay;
-  byId('one-way-disclaimer').hidden = !oneWay;
   byId('fare-label').textContent = oneWay ? '1x Adult' : '1x Weekend Pass';
   byId('usage-label').textContent = oneWay ? 'One-Way' : 'Multi Use Pass';
   byId('ticket-status').textContent = oneWay ? 'VALID FOR TRAVEL' : 'ACTIVE';
