@@ -5,6 +5,7 @@ const form = byId('route-form');
 const origin = byId('origin');
 const destination = byId('destination');
 let startedAt = null;
+let previewDuration = PREVIEW_DURATION;
 
 function updateClocks() {
   if (startedAt === null) return;
@@ -13,7 +14,7 @@ function updateClocks() {
   byId('current-time').textContent = torontoTime(now);
   byId('current-time').dateTime = now.toISOString();
   byId('elapsed').textContent = duration(elapsed);
-  byId('remaining').textContent = duration(PREVIEW_DURATION - elapsed);
+  byId('remaining').textContent = duration(previewDuration - elapsed);
 }
 
 byId('swap').addEventListener('click', () => {
@@ -29,7 +30,21 @@ form.addEventListener('submit', event => {
     return;
   }
   byId('form-error').textContent = '';
-  byId('route-title').textContent = `${from} to ${to} - Weekend Pass`;
+  const oneWay = byId('one-way-option').checked;
+  byId('preview').className = oneWay ? 'preview one-way' : 'preview';
+  byId('preview').setAttribute('aria-label', oneWay ? 'One way ticket demo' : 'Weekend pass demo');
+  byId('route-title').textContent = oneWay ? `${from} to ${to}` : `${from} to ${to} · Weekend Pass`;
+  byId('one-way-brand').hidden = !oneWay;
+  byId('one-way-arrow').hidden = !oneWay;
+  byId('one-way-disclaimer').hidden = !oneWay;
+  byId('fare-label').textContent = oneWay ? '1x Adult' : '1x Weekend Pass';
+  byId('usage-label').textContent = oneWay ? 'One-Way' : 'Multi Use Pass';
+  byId('ticket-status').textContent = oneWay ? 'VALID FOR TRAVEL' : 'ACTIVE';
+  byId('current-time-label').textContent = oneWay ? 'CURRENT TIME:' : 'CURRENT DATE & TIME:';
+  byId('ticket-instructions').innerHTML = oneWay
+    ? 'Please show this screen to the proper<br>authority on board the train.'
+    : 'Please show proof of your ticket to the<br>Customer Protective Officers when<br>asked';
+  previewDuration = oneWay ? 4 * 60 * 60 * 1000 : PREVIEW_DURATION;
   startedAt = Date.now();
   updateClocks();
   byId('setup').hidden = true;

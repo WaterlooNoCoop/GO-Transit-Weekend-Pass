@@ -5,18 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#30294e">
   <meta name="author" content="Waterloo No Coop">
-  <title>Weekend Pass · Demo</title>
+  <title>GO Transit · Ticket Demo</title>
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="app.js"></script>
 </head>
 <body>
   <main class="app">
     <section id="setup" class="setup" aria-labelledby="setup-title">
-      <div class="eyebrow">WEEKEND PASS / INTERFACE DEMO</div>
+      <div class="eyebrow">GO TRANSIT / INTERFACE DEMO</div>
       <div class="intro-icon" aria-hidden="true">↗</div>
       <h1 id="setup-title">Where are you headed?</h1>
-      <p class="intro">Choose your stations to preview a weekend pass.</p>
+      <p class="intro">Choose your ticket and stations to preview your trip.</p>
       <form id="route-form">
+        <fieldset class="ticket-options">
+          <legend>Ticket type</legend>
+          <label class="ticket-option"><input id="one-way-option" type="radio" name="ticket-type" value="one-way"><span><strong>One way ticket</strong><small>One trip for one adult</small></span></label>
+          <label class="ticket-option"><input id="weekend-option" type="radio" name="ticket-type" value="weekend" checked><span><strong>Weekend pass</strong><small>Multiple trips with one pass</small></span></label>
+        </fieldset>
         <label for="origin">Starting station</label>
         <input id="origin" name="origin" list="stations" value="Wilfrid Laurier University" placeholder="Enter starting station" maxlength="80" required autocomplete="off">
         <button type="button" id="swap" class="swap" aria-label="Swap starting station and destination">⇅</button>
@@ -35,13 +40,17 @@
           <option value="Niagara Falls GO"></option>
         </datalist>
         <p id="form-error" class="form-error" role="alert"></p>
-        <button class="primary" type="submit">Preview pass <span aria-hidden="true">→</span></button>
+        <button class="primary" type="submit">Preview ticket <span aria-hidden="true">→</span></button>
       </form>
       <p class="disclaimer">A visual demo only. This does not purchase a ticket and is not valid for travel.</p>
     </section>
 
     <section id="preview" class="preview" aria-label="Weekend pass demo" hidden>
       <header class="route-header animated-purple">
+        <div id="one-way-brand" class="one-way-brand" hidden>
+          <svg viewBox="0 0 120 58" aria-label="GO" role="img"><path fill="currentColor" d="M26 1a28 28 0 0 0 0 56V1Zm6 0v25h26A28 28 0 0 0 32 1Zm0 31v25h26V32H32ZM64 26h55a28 28 0 0 0-55 0Zm0 6a28 28 0 0 0 55 0H64Z"/></svg>
+          <div>GO TRANSIT</div>
+        </div>
         <h1 id="route-title"></h1>
       </header>
       <div class="pass-body">
@@ -49,28 +58,30 @@
           <div class="passenger">
             <div class="quantity">x1</div>
             <h2>Passenger(s)</h2>
-            <p>1x Weekend Pass</p>
+            <p id="fare-label">1x Weekend Pass</p>
           </div>
           <div class="train-divider" aria-hidden="true">
             <svg viewBox="0 0 32 44"><rect x="3" y="3" width="26" height="30" rx="7" fill="currentColor"/><path d="M6 8h8v9H6zm12 0h8v9h-8" fill="white"/><circle cx="10" cy="26" r="2.6" fill="white"/><circle cx="22" cy="26" r="2.6" fill="white"/><path d="m11 33-5 7h20l-5-7" fill="currentColor"/></svg>
           </div>
           <div class="multi-use">
             <svg class="ticket-icon" viewBox="0 0 64 56" aria-hidden="true"><g transform="rotate(-22 32 28)" fill="none" stroke="currentColor" stroke-width="5"><rect x="9" y="12" width="46" height="32" rx="3"/><path d="M40 13v30"/></g></svg>
-            <h2>Multi Use Pass</h2>
+            <svg id="one-way-arrow" class="one-way-arrow" viewBox="0 0 64 56" aria-hidden="true" hidden><path d="M4 28h54M39 9l19 19-19 19" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h2 id="usage-label">Multi Use Pass</h2>
           </div>
         </div>
         <div class="sample-details">
           <p class="reference">Ticket Number: <strong>MZ67806986</strong></p>
-          <div class="sample-panel" aria-label="Decorative stripe pattern labelled demo, not a ticket"><span>ACTIVE</span></div>
+          <div class="sample-panel" aria-label="Decorative stripe pattern labelled demo, not a ticket"><span id="ticket-status">ACTIVE</span></div>
           <div class="clocks">
-            <div><h3>CURRENT DATE &amp; TIME:</h3><time id="current-time"></time></div>
+            <div><h3 id="current-time-label">CURRENT DATE &amp; TIME:</h3><time id="current-time"></time></div>
             <div><h3>TIME SINCE ACTIVATION:</h3><span id="elapsed">00:00:00</span></div>
           </div>
         </div>
       </div>
       <footer class="pass-footer animated-purple">
-        <p>Please show proof of your ticket to the<br>Customer Protective Officers when<br>asked</p>
+        <p id="ticket-instructions">Please show proof of your ticket to the<br>Customer Protective Officers when<br>asked</p>
         <div id="remaining" class="remaining" aria-label="Preview countdown">18:00:00</div>
+        <span id="one-way-disclaimer" class="footer-label" hidden>DEMO ONLY · NOT VALID FOR TRAVEL</span>
       </footer>
     </section>
   </main>

@@ -10,6 +10,7 @@ async function setup() {
     if (!elements.has(id)) elements.set(id, {
       value: '', textContent: '', hidden: false, events: {},
       addEventListener(type, handler) { this.events[type] = handler; },
+      setAttribute(name, value) { this[name] = value; },
       focus() { this.focused = true; }
     });
     return elements.get(id);
@@ -44,4 +45,28 @@ test('station flow swaps, validates and renders names safely', async () => {
   assert.match(get('remaining').textContent, /^(18:00:00|17:59:59)$/);
   assert.match(get('current-time').dateTime, /^\d{4}-\d{2}-\d{2}T/);
   tick();
+});
+
+test('one way selection renders the adult ticket and four hour countdown', async () => {
+  const { getElement: get, submit } = await setup();
+  get('origin').value = 'Bronte GO';
+  get('destination').value = 'Rouge Hill GO';
+  get('one-way-option').checked = true;
+  submit();
+  assert.equal(get('preview').className, 'preview one-way');
+  assert.equal(get('route-title').textContent, 'Bronte GO to Rouge Hill GO');
+  assert.equal(get('fare-label').textContent, '1x Adult');
+  assert.equal(get('usage-label').textContent, 'One-Way');
+  assert.equal(get('ticket-status').textContent, 'VALID FOR TRAVEL');
+  assert.equal(get('one-way-brand').hidden, false);
+  assert.equal(get('one-way-arrow').hidden, false);
+  assert.equal(get('one-way-disclaimer').hidden, false);
+  assert.match(get('remaining').textContent, /^(04:00:00|03:59:59)$/);
+  get('one-way-option').checked = false;
+  submit();
+  assert.equal(get('preview').className, 'preview');
+  assert.equal(get('fare-label').textContent, '1x Weekend Pass');
+  assert.equal(get('ticket-status').textContent, 'ACTIVE');
+  assert.equal(get('one-way-brand').hidden, true);
+  assert.match(get('remaining').textContent, /^(18:00:00|17:59:59)$/);
 });
