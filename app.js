@@ -1,11 +1,11 @@
-import { duration, torontoTime, PREVIEW_DURATION } from './time.js';
+import { duration, torontoTime, PREVIEW_DURATION, mondayCutoff } from './time.js';
 
 const byId = id => document.getElementById(id);
 const form = byId('route-form');
 const origin = byId('origin');
 const destination = byId('destination');
 let startedAt = null;
-let previewDuration = PREVIEW_DURATION;
+let expiresAt = null;
 
 function updateClocks() {
   if (startedAt === null) return;
@@ -14,7 +14,7 @@ function updateClocks() {
   byId('current-time').textContent = torontoTime(now);
   byId('current-time').dateTime = now.toISOString();
   byId('elapsed').textContent = duration(elapsed);
-  byId('remaining').textContent = duration(previewDuration - elapsed);
+  byId('remaining').textContent = duration(expiresAt - now.getTime());
 }
 
 byId('swap').addEventListener('click', () => {
@@ -43,9 +43,10 @@ form.addEventListener('submit', event => {
   byId('ticket-instructions').innerHTML = oneWay
     ? 'Please show this screen to the proper<br>authority on board the train.'
     : 'Please show proof of your ticket to the<br>Customer Protective Officers when<br>asked';
-  previewDuration = oneWay ? 4 * 60 * 60 * 1000 : PREVIEW_DURATION;
-  const elapsedSeconds = Math.floor(Math.random() * (previewDuration / 1000));
-  startedAt = Date.now() - elapsedSeconds * 1000;
+  const now = new Date();
+  const elapsedSeconds = Math.floor(Math.random() * (PREVIEW_DURATION / 1000));
+  startedAt = now.getTime() - elapsedSeconds * 1000;
+  expiresAt = Math.min(startedAt + PREVIEW_DURATION, mondayCutoff(now));
   updateClocks();
   byId('setup').hidden = true;
   byId('preview').hidden = false;
