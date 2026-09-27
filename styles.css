@@ -75,9 +75,10 @@ button:focus-visible { outline: 3px solid #a992d3; outline-offset: 3px; }
 .one-way .route-header::after { background: #348418; }
 .one-way-brand { position: relative; text-align: center; font-size: 5.2cqw; font-weight: 900; margin-bottom: 3cqw; }
 .brand-scroll { overflow: hidden; }
-.brand-scroll-track { display: flex; align-items: center; justify-content: space-around; width: 100%; white-space: nowrap; animation: brand-scroll 8s linear infinite; }
+.brand-scroll-track { display: flex; width: 200%; white-space: nowrap; animation: brand-scroll 4s linear infinite; }
+.brand-scroll-group { display: flex; align-items: center; justify-content: space-around; width: 50%; flex-shrink: 0; }
 .brand-dot { width: 1.4cqw; height: 1.4cqw; flex-shrink: 0; border-radius: 50%; background: #fff; }
-@keyframes brand-scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+@keyframes brand-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .one-way-brand svg { display: block; width: 19cqw; height: 9.5cqw; margin: 0 auto 5.5cqw; }
 .preview .summary { min-height: 36cqw; padding: 7cqw 0 5.5cqw; }
 .one-way .ticket-icon { display: none; }
