@@ -43,7 +43,11 @@ input:focus { outline: 3px solid #d9d0ee; border-color: #655486; }
 .reference { font-size: 4.5cqw; text-align: center; margin: 0 0 2.7cqw; color: #111; }
 .reference strong { color: #374146; font-weight: 900; }
 .sample-panel { margin: 0 3cqw; height: 14cqw; background: repeating-linear-gradient(90deg, #a9adae 0 1cqw, #fff 1cqw 2.2cqw, #a9adae 2.2cqw 5.4cqw, #fff 5.4cqw 6.7cqw, #a9adae 6.7cqw 7.6cqw, #fff 7.6cqw 8.9cqw, #a9adae 8.9cqw 11.1cqw, #fff 11.1cqw 12.4cqw); display: flex; align-items: center; justify-content: center; color: #827ba5; }
-.sample-panel span { display: grid; place-items: center; width: 30cqw; height: 10cqw; background: #fff; font-size: 5.8cqw; font-weight: 400; }
+.sample-panel span { display: grid; place-items: center; width: 30cqw; height: 10cqw; background: #fff; font-size: 5.8cqw; font-weight: 400; animation: active-fade 1.8s ease-in-out infinite; }
+@keyframes active-fade {
+  0%, 100% { color: rgb(130 123 165 / 1); }
+  50% { color: rgb(130 123 165 / 0); }
+}
 .clocks { display: grid; grid-template-columns: 59% 41%; text-align: center; margin-top: 4.4cqw; }
 .clocks h3 { font-size: 2.65cqw; font-weight: 900; color: #111; margin: 0 0 1cqw; }
 .clocks time, .clocks span { display: block; font-size: 4.15cqw; font-weight: 900; white-space: nowrap; }
@@ -53,4 +57,4 @@ input:focus { outline: 3px solid #d9d0ee; border-color: #655486; }
 .footer-label { font-size: 2cqw; display: block; margin-top: 1.5cqw; letter-spacing: 0.25cqw; opacity: .75; }
 button:focus-visible { outline: 3px solid #a992d3; outline-offset: 3px; }
 @media (min-width: 650px) { .app { margin: 32px auto; min-height: calc(100dvh - 64px); box-shadow: 0 12px 60px #30294e15; border-radius: 14px; overflow: hidden; } }
-@media (prefers-reduced-motion: reduce) { .animated-purple { animation: none; } .animated-purple::before { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .animated-purple, .sample-panel span { animation: none; } .animated-purple::before { animation: none; } }
