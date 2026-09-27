@@ -18,7 +18,7 @@ async function setup() {
   let tick;
   const source = await readFile(new URL('./app.js', import.meta.url), 'utf8');
   runInNewContext(source.replace(/^import[^\n]+\n/, ''), {
-    duration, torontoTime, PREVIEW_DURATION, Date,
+    duration, torontoTime, PREVIEW_DURATION, Date, Math: { random: () => 0.25, floor: Math.floor },
     document: { getElementById: getElement, addEventListener() {} },
     window: { scrollTo() {} },
     setInterval(handler) { tick = handler; }
@@ -41,8 +41,8 @@ test('station flow swaps, validates and renders names safely', async () => {
   assert.equal(get('route-title').textContent, 'Bramalea GO to <b>Custom station</b> · Weekend Pass');
   assert.equal(get('setup').hidden, true);
   assert.equal(get('preview').hidden, false);
-  assert.equal(get('elapsed').textContent, '00:00:00');
-  assert.match(get('remaining').textContent, /^(18:00:00|17:59:59)$/);
+  assert.equal(get('elapsed').textContent, '04:30:00');
+  assert.match(get('remaining').textContent, /^(13:30:00|13:29:59)$/);
   assert.match(get('current-time').dateTime, /^\d{4}-\d{2}-\d{2}T/);
   tick();
 });
@@ -60,12 +60,14 @@ test('one way selection renders the adult ticket and four hour countdown', async
   assert.equal(get('ticket-status').textContent, 'VALID FOR TRAVEL');
   assert.equal(get('one-way-brand').hidden, false);
   assert.equal(get('one-way-arrow').hidden, false);
-  assert.match(get('remaining').textContent, /^(04:00:00|03:59:59)$/);
+  assert.equal(get('elapsed').textContent, '01:00:00');
+  assert.match(get('remaining').textContent, /^(03:00:00|02:59:59)$/);
   get('one-way-option').checked = false;
   submit();
   assert.equal(get('preview').className, 'preview');
   assert.equal(get('fare-label').textContent, '1x Weekend Pass');
   assert.equal(get('ticket-status').textContent, 'ACTIVE');
   assert.equal(get('one-way-brand').hidden, false);
-  assert.match(get('remaining').textContent, /^(18:00:00|17:59:59)$/);
+  assert.equal(get('elapsed').textContent, '04:30:00');
+  assert.match(get('remaining').textContent, /^(13:30:00|13:29:59)$/);
 });

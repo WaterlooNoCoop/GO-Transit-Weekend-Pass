@@ -44,7 +44,8 @@ form.addEventListener('submit', event => {
     ? 'Please show this screen to the proper<br>authority on board the train.'
     : 'Please show proof of your ticket to the<br>Customer Protective Officers when<br>asked';
   previewDuration = oneWay ? 4 * 60 * 60 * 1000 : PREVIEW_DURATION;
-  startedAt = Date.now();
+  const elapsedSeconds = Math.floor(Math.random() * (previewDuration / 1000));
+  startedAt = Date.now() - elapsedSeconds * 1000;
   updateClocks();
   byId('setup').hidden = true;
   byId('preview').hidden = false;
